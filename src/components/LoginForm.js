@@ -9,11 +9,12 @@ const LoginForm = (props) => {
   const [passwordVal, setPasswordVal] = useState("");
   const [validate, setValidate] = useState("");
   const [errors, setErrors] = useState([]);
+  const [response, setResponse] = useState("");
 
   const handleEmail = (e) => {
     var email = e.target.value;
     if (validator.isEmail(email)) {
-      setValidate("valid email");
+      setValidate(true);
     } else {
       setValidate("invalid email");
     }
@@ -31,24 +32,45 @@ const LoginForm = (props) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    axios
-      .post("http://dev.rapptrlabs.com/Tests/scripts/user-login.php", {
-        email,
-        password,
-      })
-      .then((res) => {
-        console.log(res);
-        navigate("/list");
-      })
-      .catch((err) => {
-        const errRes = err.response.data.errors;
-        const errors = [];
-        for (const key of Object.keys(errors)) {
-          errors.push(errRes[key].message);
-        }
-        console.log(errors);
-        setErrors(errors);
-      });
+    if (validate && passwordVal) {
+      axios
+        .post(
+          "http://dev.rapptrlabs.com/Tests/scripts/user-login.php",
+          {},
+          {
+            params: {
+              email,
+              password,
+            },
+          }
+        )
+        .then((response) => {
+          setResponse(response.data);
+        });
+      console.log(response);
+      navigate("/list");
+    } else {
+      console.log("wrong submission");
+    }
+
+    // axios
+    //   .post("http://dev.rapptrlabs.com/Tests/scripts/user-login.php", {
+    //     email,
+    //     password,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     navigate("/list");
+    //   })
+    //   .catch((err) => {
+    //     const errRes = err.response.data.errors;
+    //     const errors = [];
+    //     for (const key of Object.keys(errors)) {
+    //       errors.push(errRes[key].message);
+    //     }
+    //     console.log(errors);
+    //     setErrors(errors);
+    //   });
   };
 
   return (

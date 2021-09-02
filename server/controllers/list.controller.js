@@ -1,4 +1,4 @@
-const { List } = require("../models/list.models");
+const { List } = require("../models/list.model");
 
 module.exports.index = (req, res) => {
   res.json({
