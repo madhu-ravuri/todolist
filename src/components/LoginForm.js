@@ -8,7 +8,7 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
   const [passwordVal, setPasswordVal] = useState("");
   const [validate, setValidate] = useState("");
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [response, setResponse] = useState("");
 
   const handleEmail = (e) => {
@@ -18,19 +18,22 @@ const LoginForm = (props) => {
     } else {
       setValidate("invalid email");
     }
+    setEmail(email);
   };
 
   const handlePass = (e) => {
     var password = e.target.value;
-    if (password.length > 4 && password.length < 16) {
+    if (password.length > 4 && password.length <= 16) {
       setPasswordVal(true);
     } else {
       setPasswordVal(false);
     }
+    setPassword(password);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    console.log(password + " - " + email);
 
     if (validate && passwordVal) {
       axios
@@ -52,25 +55,6 @@ const LoginForm = (props) => {
     } else {
       console.log("wrong submission");
     }
-
-    // axios
-    //   .post("http://dev.rapptrlabs.com/Tests/scripts/user-login.php", {
-    //     email,
-    //     password,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     navigate("/list");
-    //   })
-    //   .catch((err) => {
-    //     const errRes = err.response.data.errors;
-    //     const errors = [];
-    //     for (const key of Object.keys(errors)) {
-    //       errors.push(errRes[key].message);
-    //     }
-    //     console.log(errors);
-    //     setErrors(errors);
-    //   });
   };
 
   return (
