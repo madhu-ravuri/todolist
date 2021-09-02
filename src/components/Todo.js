@@ -39,7 +39,7 @@ const Todo = () => {
     // console.log("new: " + newTasks);
     setTasks(newTasks);
     // console.log(tasks);
-    saveData(tasks);
+    saveData(newTasks);
 
     setTask("");
   };
@@ -49,12 +49,8 @@ const Todo = () => {
       return i !== delIndex;
     });
     setTasks(newTasks);
-    saveData(tasks);
+    saveData(newTasks);
   };
-
-  //   {create && (
-
-  //     )}
 
   return (
     <div>

@@ -41,6 +41,10 @@ const Button = styled.button`
   }
 `;
 
+const Label = styled.label`
+  margin: 0;
+`;
+
 const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -100,7 +104,7 @@ const LoginForm = (props) => {
       <GlobalStyle />
       <Container>
         <form onSubmit={onSubmitHandler} className="align-items-center">
-          <label for="email-input">Email</label>
+          <Label htmlFor="email-input">Email</Label>
           <div className="input-group">
             <span className="input-group-text" id="email-icon">
               @
@@ -121,8 +125,8 @@ const LoginForm = (props) => {
               {validate}
             </span>
           </div>
+          <label>Password</label>
           <div className="input-group mb-3">
-            <label>Password</label>
             <input
               type="password"
               placeholder="Must be at least 4 characters"
