@@ -11,7 +11,7 @@ export default () => {
 
   return (
     <div>
-      {/* <Button style={{ backgroundColor: "black" }}>Logout</Button> */}
+      <Button style={{ backgroundColor: "black" }}>Logout</Button>
       <Header title="My Todo List" />
       <Todo />
     </div>

@@ -3,6 +3,44 @@ import axios from "axios";
 import { navigate } from "@reach/router";
 import validator from "validator";
 
+import styled, { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background: #EAEAEA;
+  }
+
+  body, html, #root {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;;
+  }
+`;
+
+const Container = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  background-color: #4f6d7a;
+  color: white;
+  box-shadow: 1px 1px 4px #4a5759;
+  border: 0px;
+  border-radius: 2px;
+  :hover {
+    background-color: #c0d6df;
+    color: #4f6d7a;
+    font-weight: bold;
+  }
+`;
+
 const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,38 +97,41 @@ const LoginForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={onSubmitHandler} className="align-items-center">
-        <div className="input-group">
+      <GlobalStyle />
+      <Container>
+        <form onSubmit={onSubmitHandler} className="align-items-center">
           <label for="email-input">Email</label>
-          <span className="input-group-text" id="email-icon">
-            @
-          </span>
-          <input
-            type="text"
-            placeholder="user@rapptrlabs.com"
-            onChange={(e) => handleEmail(e)}
-          />
-        </div>
-        <div className="col-2">
-          <span
-            style={{
-              fontWeight: "bold",
-              color: "red",
-            }}
-          >
-            {validate}
-          </span>
-        </div>
-        <div className="input-group mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Must be at least 4 characters"
-            onChange={(e) => handlePass(e)}
-          />
-        </div>
-        <input type="submit" />
-      </form>
+          <div className="input-group">
+            <span className="input-group-text" id="email-icon">
+              @
+            </span>
+            <input
+              type="text"
+              placeholder="user@rapptrlabs.com"
+              onChange={(e) => handleEmail(e)}
+            />
+          </div>
+          <div className="col-2">
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "red",
+              }}
+            >
+              {validate}
+            </span>
+          </div>
+          <div className="input-group mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Must be at least 4 characters"
+              onChange={(e) => handlePass(e)}
+            />
+          </div>
+          <Button>Login</Button>
+        </form>
+      </Container>
     </div>
   );
 };
