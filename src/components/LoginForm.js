@@ -20,6 +20,7 @@ const Button = styled.button`
 `;
 
 const Label = styled.label`
+  font-size: 12px;
   margin: 0 1px;
   font-weight: bold;
 `;
@@ -113,7 +114,16 @@ const LoginForm = (props) => {
         <div className="col">
           <p className="error">{passwordVal}</p>
         </div>
-        <Button disabled={!validate || validate.length > 4}>Login</Button>
+        <Button
+          disabled={
+            !validate ||
+            validate.length > 4 ||
+            !passwordVal ||
+            passwordVal.length > 4
+          }
+        >
+          Login
+        </Button>
       </form>
     </div>
   );
