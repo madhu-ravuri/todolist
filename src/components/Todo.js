@@ -48,18 +48,29 @@ const Todo = () => {
 
   const assignEdit = (id, task) => {
     setEdit(id);
-    setCurrentTask({ ...task });
+    setCurrentTask(task);
   };
 
   const handleTaskEdit = (e) => {
     setCurrentTask(e.target.value);
-    console.log(currentTask);
   };
+
+  function updateTask(id, update) {
+    const changes = tasks.map((task, i) => {
+      console.log(task + " " + i);
+      if (i === id) {
+      }
+      return i === id ? update : task;
+    });
+
+    setEdit(false);
+    setTasks(changes);
+  }
 
   const editTask = (e, id) => {
     e.preventDefault();
-    console.log(id);
-    console.log("CURRENT: " + currentTask);
+    console.log("entered editTask: " + id);
+    // console.log("CURRENT: " + currentTask);
 
     updateTask(id, currentTask);
 
@@ -76,19 +87,6 @@ const Todo = () => {
     // saveData(changes);
     // setEdit(false);
   };
-
-  function updateTask(id, update) {
-    console.log(update);
-    console.log("update id: " + id);
-    const changes = tasks.map((task) => {
-      console.log(task + " " + task.id);
-      return task.id === id ? update : task;
-    });
-
-    setEdit(false);
-    setTasks(changes);
-    console.log(changes);
-  }
 
   const deleteTask = (delIndex) => {
     const newTasks = tasks.filter((task, i) => {
@@ -136,7 +134,9 @@ const Todo = () => {
                 </div>
               ) : (
                 <div>
-                  <span>{task}</span>
+                  <span>
+                    {task} {i}
+                  </span>
                   <FaPen onClick={(e) => assignEdit(i, task)} />
                   <FaTrashAlt onClick={(e) => deleteTask(i)} />
                 </div>
