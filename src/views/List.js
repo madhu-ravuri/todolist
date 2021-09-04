@@ -1,4 +1,5 @@
 import React from "react";
+import { navigate } from "@reach/router";
 import styled from "styled-components";
 
 import Header from "../components/Header";
@@ -9,9 +10,16 @@ export default () => {
     color: white;
   `;
 
+  const logout = (e) => {
+    window.localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <div>
-      <Button style={{ backgroundColor: "black" }}>Logout</Button>
+      <Button onClick={logout} style={{ backgroundColor: "black" }}>
+        Logout
+      </Button>
       <Header title="My Todo List" />
       <Todo />
     </div>

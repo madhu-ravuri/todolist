@@ -58,3 +58,7 @@
   text-align: left;
   margin-left: -10px;
 }
+
+#invalid.form-control {
+  border: 12px red !important;
+}

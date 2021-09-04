@@ -8,7 +8,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 
 const Button = styled.button`
   width: 100%;
-  margin: 15px 0;
+  margin: 25px 0;
   background-color: #4f6d7a;
   color: white;
   box-shadow: 1px 1px 4px #4a5759;
@@ -29,26 +29,27 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
   const [passwordVal, setPasswordVal] = useState("");
   const [validate, setValidate] = useState("");
-  const [styleError, setStyleError] = useState("");
+  const [valStyle, setValStyle] = useState(""); // for red border
   const [response, setResponse] = useState("");
 
   const handleEmail = (e) => {
     var email = e.target.value;
-    if (validator.isEmail(email)) {
+    if (validator.isEmail(email) && email.length < 50) {
       setValidate(true);
     } else {
       setValidate("Not a valid email");
-      setStyleError("style={{ border:'1px red' }}");
+      setValStyle("invalid");
     }
     setEmail(email);
   };
 
   const handlePass = (e) => {
     var password = e.target.value;
+
     if (password.length > 4 && password.length <= 16) {
       setPasswordVal(true);
     } else {
-      setPasswordVal(false);
+      setPasswordVal("Password is incorrect");
     }
     setPassword(password);
   };
@@ -88,8 +89,8 @@ const LoginForm = (props) => {
           </span>
           <input
             type="text"
+            id={valStyle}
             className="form-control"
-            style={{ styleError }}
             placeholder="user@rapptrlabs.com"
             onChange={(e) => handleEmail(e)}
           />
@@ -108,6 +109,9 @@ const LoginForm = (props) => {
             placeholder="Must be at least 4 characters"
             onChange={(e) => handlePass(e)}
           />
+        </div>
+        <div className="col">
+          <p className="error">{passwordVal}</p>
         </div>
         <Button disabled={!validate || validate.length > 4}>Login</Button>
       </form>
