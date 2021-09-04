@@ -16,6 +16,16 @@ const Todo = () => {
     border-radius: 2px;
   `;
 
+  const AddButton = styled.button`
+    background-color: #4f6d7a;
+    font-size: small;
+    font-weight: bold;
+    color: white;
+    padding: 0 10px;
+    border: none;
+    border-radius: 4px;
+  `;
+
   function toggle() {
     showCreate((wasOpened) => !wasOpened);
   }
@@ -83,9 +93,15 @@ const Todo = () => {
 
   return (
     <div>
-      <Button style={{ backgroundColor: "blue" }} onClick={toggle}>
-        New
-      </Button>
+      <div className="d-flex">
+        <input
+          type="text"
+          placeholder="Search"
+          className="prompt form-control mr-2"
+        />
+
+        <AddButton onClick={toggle}>New</AddButton>
+      </div>
       {create && (
         <form onSubmit={addTask}>
           <input
