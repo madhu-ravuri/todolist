@@ -1,7 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import styled from "styled-components";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
+
+const Button = styled.button`
+  color: white;
+  border: 0px;
+  border-radius: 2px;
+`;
+
+const AddButton = styled.button`
+  background-color: #4f6d7a;
+  font-size: small;
+  font-weight: bold;
+  color: white;
+  padding: 0 10px;
+  border: none;
+  border-radius: 4px;
+`;
 
 const Todo = () => {
   const [create, showCreate] = useState(false); // toggle add new
@@ -9,22 +25,9 @@ const Todo = () => {
   const [tasks, setTasks] = useState([]); // list of all tasks
   const [edit, setEdit] = useState(false); // tag which task is open to be edited
   const [currentTask, setCurrentTask] = useState({});
-
-  const Button = styled.button`
-    color: white;
-    border: 0px;
-    border-radius: 2px;
-  `;
-
-  const AddButton = styled.button`
-    background-color: #4f6d7a;
-    font-size: small;
-    font-weight: bold;
-    color: white;
-    padding: 0 10px;
-    border: none;
-    border-radius: 4px;
-  `;
+  const [searchTerm, setSearchTerm] = useState("");
+  const inputEl = useRef("");
+  const [results, setResults] = useState([]);
 
   function toggle() {
     showCreate((wasOpened) => !wasOpened);
@@ -83,6 +86,21 @@ const Todo = () => {
     updateTask(id, currentTask);
   };
 
+  // const searchHandler = (term) => {
+  //   console.log(term);
+  // };
+
+  const getSearchTerm = () => {
+    setSearchTerm(inputEl.current.value);
+
+    if (searchTerm !== "") {
+      const taskSearch = tasks.filter((task) => {
+        return task.includes(searchTerm);
+      });
+      console.log("search results: " + taskSearch);
+    }
+  };
+
   const deleteTask = (delIndex) => {
     const newTasks = tasks.filter((task, i) => {
       return i !== delIndex;
@@ -97,6 +115,9 @@ const Todo = () => {
         <input
           type="text"
           placeholder="Search"
+          ref={inputEl}
+          value={searchTerm}
+          onChange={getSearchTerm}
           className="prompt form-control mr-2"
         />
 
