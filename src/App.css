@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+/* custom css starts here */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background: #eaeaea;
+  font-family: "Montserrat", sans-serif;
+}
+
+::placeholder {
+  font-size: small;
+}
+
+.error {
+  font-size: small;
+  font-weight: bold;
+  color: tomato;
+  text-align: left;
+  margin-left: -10px;
+}

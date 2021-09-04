@@ -1,12 +1,19 @@
 import React from "react";
 
+import styled from "styled-components";
+
+const Nav = styled.nav`
+  letter-spacing: 0.2em;
+  margin-left: 20px;
+`;
+
 const Header = (props) => {
   return (
-    <nav class="navbar">
-      <div className="row col-12 d-flex justify-content-center">
-        <span className="h2">{props.title}</span>
+    <Nav>
+      <div className="row col-12 d-flex justify-content-center mt-4">
+        <span className="h2 mt-4">{props.title}</span>
       </div>
-    </nav>
+    </Nav>
   );
 };
 

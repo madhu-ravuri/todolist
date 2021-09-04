@@ -3,46 +3,25 @@ import axios from "axios";
 import { navigate } from "@reach/router";
 import validator from "validator";
 
-import styled, { createGlobalStyle } from "styled-components";
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    background: #EAEAEA;
-  }
-
-  body, html, #root {
-    height: 100%;
-    font-family: 'Montserrat', sans-serif;;
-  }
-`;
-
-const Container = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-`;
+import styled from "styled-components";
+import { FaUser, FaLock } from "react-icons/fa";
 
 const Button = styled.button`
   width: 100%;
+  margin: 15px 0;
   background-color: #4f6d7a;
   color: white;
   box-shadow: 1px 1px 4px #4a5759;
   border: 0px;
   border-radius: 2px;
-  :hover {
-    background-color: #c0d6df;
-    color: #4f6d7a;
-    font-weight: bold;
+  :disabled {
+    opacity: 0.5;
   }
 `;
 
 const Label = styled.label`
-  margin: 0;
+  margin: 0 1px;
+  font-weight: bold;
 `;
 
 const LoginForm = (props) => {
@@ -50,7 +29,7 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
   const [passwordVal, setPasswordVal] = useState("");
   const [validate, setValidate] = useState("");
-  // const [errors, setErrors] = useState([]);
+  const [styleError, setStyleError] = useState("");
   const [response, setResponse] = useState("");
 
   const handleEmail = (e) => {
@@ -58,7 +37,8 @@ const LoginForm = (props) => {
     if (validator.isEmail(email)) {
       setValidate(true);
     } else {
-      setValidate("invalid email");
+      setValidate("Not a valid email");
+      setStyleError("style={{ border:'1px red' }}");
     }
     setEmail(email);
   };
@@ -75,7 +55,6 @@ const LoginForm = (props) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(password + " - " + email);
 
     if (validate && passwordVal) {
       axios
@@ -101,41 +80,37 @@ const LoginForm = (props) => {
 
   return (
     <div>
-      <GlobalStyle />
-      <Container>
-        <form onSubmit={onSubmitHandler} className="align-items-center">
-          <Label htmlFor="email-input">Email</Label>
-          <div className="input-group">
-            <span className="input-group-text" id="email-icon">
-              @
-            </span>
-            <input
-              type="text"
-              placeholder="user@rapptrlabs.com"
-              onChange={(e) => handleEmail(e)}
-            />
-          </div>
-          <div className="col-2">
-            <span
-              style={{
-                fontWeight: "bold",
-                color: "red",
-              }}
-            >
-              {validate}
-            </span>
-          </div>
-          <label>Password</label>
-          <div className="input-group mb-3">
-            <input
-              type="password"
-              placeholder="Must be at least 4 characters"
-              onChange={(e) => handlePass(e)}
-            />
-          </div>
-          <Button>Login</Button>
-        </form>
-      </Container>
+      <form onSubmit={onSubmitHandler} className="align-items-center">
+        <Label>Email</Label>
+        <div className="input-group">
+          <span className="input-group-text" id="email-icon">
+            <FaUser />
+          </span>
+          <input
+            type="text"
+            className="form-control"
+            style={{ styleError }}
+            placeholder="user@rapptrlabs.com"
+            onChange={(e) => handleEmail(e)}
+          />
+        </div>
+        <div className="col">
+          <p className="error">{validate}</p>
+        </div>
+        <Label>Password</Label>
+        <div className="input-group">
+          <span className="input-group-text" id="email-icon">
+            <FaLock />
+          </span>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Must be at least 4 characters"
+            onChange={(e) => handlePass(e)}
+          />
+        </div>
+        <Button disabled={!validate || validate.length > 4}>Login</Button>
+      </form>
     </div>
   );
 };

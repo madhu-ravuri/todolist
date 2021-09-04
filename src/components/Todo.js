@@ -65,27 +65,12 @@ const Todo = () => {
 
     setEdit(false);
     setTasks(changes);
+    saveData(changes);
   }
 
   const editTask = (e, id) => {
     e.preventDefault();
-    console.log("entered editTask: " + id);
-    // console.log("CURRENT: " + currentTask);
-
     updateTask(id, currentTask);
-
-    // let changes = tasks.map((task) => {
-    //   if (task.id === id) {
-    //     setTask(taskChange);
-    //   }
-    //   return task;
-    // });
-
-    // console.log("CHANGED: " + task);
-    // console.log(changes);
-    // // setTasks(changes);
-    // saveData(changes);
-    // setEdit(false);
   };
 
   const deleteTask = (delIndex) => {
@@ -134,16 +119,11 @@ const Todo = () => {
                 </div>
               ) : (
                 <div>
-                  <span>
-                    {task} {i}
-                  </span>
+                  <span>{task}</span>
                   <FaPen onClick={(e) => assignEdit(i, task)} />
                   <FaTrashAlt onClick={(e) => deleteTask(i)} />
                 </div>
               )}
-              {/* <span>{task}</span>
-              <FaPen onClick={(e) => handleEdit(i)} />
-              <FaTrashAlt onClick={(e) => deleteTask(i)} /> */}
             </div>
           );
         })}
