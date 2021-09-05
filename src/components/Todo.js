@@ -50,11 +50,11 @@ const Todo = () => {
   const addTask = (e) => {
     e.preventDefault();
 
-    const newTasks = [...tasks, task];
-    // console.log("new: " + newTasks);
-    setTasks(newTasks);
-    // console.log(tasks);
-    saveData(newTasks);
+    if (task.length > 1 && task.length <= 25) {
+      const newTasks = [...tasks, task];
+      setTasks(newTasks);
+      saveData(newTasks);
+    }
 
     setTask("");
   };
