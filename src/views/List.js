@@ -6,7 +6,8 @@ import Header from "../components/Header";
 import Todo from "../components/Todo";
 
 const Container = styled.div`
-  border: 2px #1d7874 solid;
+  margin: 15px 0;
+  border: 2px #8fa6cb solid;
   border-radius: 6px;
   padding: 10px;
   display: inline-block;

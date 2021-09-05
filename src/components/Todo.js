@@ -28,21 +28,23 @@ const SaveButton = styled.button`
   font-weight: bold;
   color: #4f6d7a;
   padding: 0 10px;
-  margin: 4px 0 0 8px;
+  margin: 3px 0 0 8px;
   border: none;
   border-radius: 4px;
 `;
 
 const ListItem = styled.div`
+  color: #495d63;
   margin: 4px 0;
   display: flex;
   justify-content: space-between;
-  border: 1px #1d7874 dashed;
-  border-radius: 4px;
+  border-bottom: 1px #8fa6cb dashed;
   padding: 8px;
+  font-weight: bold;
 `;
 
 const Icons = styled.div`
+  color: #8fa6cb;
   width: 18%;
   display: flex;
   justify-content: space-between;
