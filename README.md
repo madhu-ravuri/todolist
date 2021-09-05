@@ -4,6 +4,19 @@ A React-based project for creating a simple todo list, complete with edit, delet
 
 # Libraries Used
 
+#
+
+This project was started on August 31 and took about six days to complete. I alloted each day to a different feature to be added. The schedule was roughly as follows:
+  
+  Day One - Login Form & Validations
+  Day Two - API call (POST Request)
+  Day Three - API Troubleshooting, Create List Item, Delete List Item
+  Day Four - Edit List Item, Search List
+  Day Five - Search List, CSS/Styling
+  Day Six - Styling, General troubleshooting
+ 
+ 
+
 Bootstrap, Styled-Components, React-Icons (FontAwesome).
 
 # Getting Started with Create React App
