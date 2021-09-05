@@ -5,11 +5,13 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import Todo from "../components/Todo";
 
-const Container = styled.section`
+const Container = styled.div`
+  border: 2px #1d7874 solid;
+  border-radius: 6px;
+  padding: 10px;
   display: inline-block;
   text-align: center;
   height: 100%;
-  width: 40%;
 `;
 
 const Button = styled.button`

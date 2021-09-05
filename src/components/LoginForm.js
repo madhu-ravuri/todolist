@@ -14,7 +14,12 @@ const Button = styled.button`
   box-shadow: 1px 1px 4px #4a5759;
   border: 0px;
   border-radius: 2px;
+  :hover {
+    background-color: #c0d6df;
+    font-weight: bold;
+  }
   :disabled {
+    background-color: grey;
     opacity: 0.5;
   }
 `;

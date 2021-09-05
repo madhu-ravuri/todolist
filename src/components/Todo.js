@@ -9,7 +9,7 @@ const Button = styled.button`
   border-radius: 2px;
 `;
 
-const AddButton = styled.button`
+const NewButton = styled.button`
   background-color: #4f6d7a;
   font-size: small;
   font-weight: bold;
@@ -17,6 +17,35 @@ const AddButton = styled.button`
   padding: 0 10px;
   border: none;
   border-radius: 4px;
+  :active {
+    background-color: #c0d6df;
+  }
+`;
+
+const SaveButton = styled.button`
+  background-color: #c0d6df;
+  font-size: small;
+  font-weight: bold;
+  color: #4f6d7a;
+  padding: 0 10px;
+  margin: 4px 0 0 8px;
+  border: none;
+  border-radius: 4px;
+`;
+
+const ListItem = styled.div`
+  margin: 4px 0;
+  display: flex;
+  justify-content: space-between;
+  border: 1px #1d7874 dashed;
+  border-radius: 4px;
+  padding: 8px;
+`;
+
+const Icons = styled.div`
+  width: 18%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Todo = () => {
@@ -26,8 +55,7 @@ const Todo = () => {
   const [edit, setEdit] = useState(false); // tag which task is open to be edited
   const [currentTask, setCurrentTask] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
-  const inputEl = useRef("");
-  const [results, setResults] = useState([]);
+  // const inputEl = useRef("");
 
   function toggle() {
     showCreate((wasOpened) => !wasOpened);
@@ -86,20 +114,26 @@ const Todo = () => {
     updateTask(id, currentTask);
   };
 
-  // const searchHandler = (term) => {
-  //   console.log(term);
-  // };
+  const getSearchTerm = (e) => {
+    // setSearchTerm(inputEl.current.value);
+    setSearchTerm(e.target.value);
 
-  const getSearchTerm = () => {
-    setSearchTerm(inputEl.current.value);
+    searchList(searchTerm);
+  };
 
+  function searchList(searchTerm) {
     if (searchTerm !== "") {
       const taskSearch = tasks.filter((task) => {
         return task.includes(searchTerm);
       });
       console.log("search results: " + taskSearch);
+      // setResults(taskSearch);
+      setTasks(taskSearch);
+    } else {
+      setTasks(tasks);
+      console.log("all: " + tasks);
     }
-  };
+  }
 
   const deleteTask = (delIndex) => {
     const newTasks = tasks.filter((task, i) => {
@@ -115,25 +149,23 @@ const Todo = () => {
         <input
           type="text"
           placeholder="Search"
-          ref={inputEl}
           value={searchTerm}
           onChange={getSearchTerm}
-          className="prompt form-control mr-2"
+          className="form-control mr-2"
         />
 
-        <AddButton onClick={toggle}>New</AddButton>
+        <NewButton onClick={toggle}>New</NewButton>
       </div>
       {create && (
-        <form onSubmit={addTask}>
+        <form className="d-flex justify-content-center" onSubmit={addTask}>
           <input
             type="text"
             placeholder="add new task"
+            className="form-control mt-1"
             onChange={newTask}
             value={task}
           />
-          <Button type="submit" style={{ backgroundColor: "black" }}>
-            Save
-          </Button>
+          <SaveButton type="submit">Save</SaveButton>
         </form>
       )}
 
@@ -142,24 +174,28 @@ const Todo = () => {
           return (
             <div key={i}>
               {edit === i ? (
-                <div>
-                  <form onSubmit={(e) => editTask(e, i, currentTask)}>
+                <ListItem>
+                  <form
+                    className="d-flex justify-content-center"
+                    onSubmit={(e) => editTask(e, i, currentTask)}
+                  >
                     <input
                       type="text"
                       placeholder={task}
+                      className="form-control"
                       onChange={handleTaskEdit}
                     />
-                    <Button type="submit" style={{ backgroundColor: "black" }}>
-                      Save
-                    </Button>
+                    <SaveButton type="submit">Save</SaveButton>
                   </form>
-                </div>
+                </ListItem>
               ) : (
-                <div>
+                <ListItem>
                   <span>{task}</span>
-                  <FaPen onClick={(e) => assignEdit(i, task)} />
-                  <FaTrashAlt onClick={(e) => deleteTask(i)} />
-                </div>
+                  <Icons>
+                    <FaPen onClick={(e) => assignEdit(i, task)} />
+                    <FaTrashAlt onClick={(e) => deleteTask(i)} />
+                  </Icons>
+                </ListItem>
               )}
             </div>
           );
