@@ -2,13 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 
 import styled from "styled-components";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
-
-const Button = styled.button`
-  color: white;
-  border: 0px;
-  border-radius: 2px;
-`;
 
 const NewButton = styled.button`
   background-color: #4f6d7a;
