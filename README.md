@@ -4,6 +4,8 @@ A React-based project for creating a simple todo list, complete with edit, delet
 
 # Libraries Used
 
+Bootstrap, Styled-Components, React-Icons (FontAwesome).
+
 #
 
 This project was started on August 31 and took about six days to complete. I alloted each day to a different feature to be added. The schedule was roughly as follows:
@@ -16,8 +18,6 @@ This project was started on August 31 and took about six days to complete. I all
   Day Six - Styling, General troubleshooting
  
  
-
-Bootstrap, Styled-Components, React-Icons (FontAwesome).
 
 # Getting Started with Create React App
 
