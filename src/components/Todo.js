@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import styled from "styled-components";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
+import { isCompositeComponentWithType } from "react-dom/test-utils";
 
 const Button = styled.button`
   color: white;
@@ -124,16 +125,28 @@ const Todo = () => {
   };
 
   function searchList(searchTerm) {
-    if (searchTerm !== "") {
+    // if (searchTerm !== "") {
+    //   const taskSearch = tasks.filter((task) => {
+    //     return task.includes(searchTerm);
+    //   });
+    //   console.log("search results: " + taskSearch);
+    //   // setResults(taskSearch);
+    //   setTasks(taskSearch);
+    // } else {
+    //   setTasks(tasks);
+    //   console.log("all: " + tasks);
+    // }
+
+    if (searchTerm.length < 0) {
+      setTasks(tasks);
+      console.log("no search term: " + tasks);
+    } else {
       const taskSearch = tasks.filter((task) => {
         return task.includes(searchTerm);
       });
       console.log("search results: " + taskSearch);
       // setResults(taskSearch);
       setTasks(taskSearch);
-    } else {
-      setTasks(tasks);
-      console.log("all: " + tasks);
     }
   }
 
