@@ -1,3 +1,11 @@
+# A Simple Todo List
+
+A React-based project for creating a simple todo list, complete with edit, delete, and search features.
+
+# Libraries Used
+
+Bootstrap, Styled-Components, React-Icons (FontAwesome).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
